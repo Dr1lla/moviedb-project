@@ -1,0 +1,65 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+}
+
+.logo {
+    font-size: 24px;
+}
+
+.menu {
+    display: flex;
+}
+
+.menu-button {
+    margin-right: 10px;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+.theme-button {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+.movie-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+    padding: 20px; /* Додаємо відступи по боках */
+}
+
+.movie-item {
+    margin: 10px; /* Проміжок між фільмами */
+    text-align: center;
+    width: 270px; /* Ширина блоку фільму */
+    padding: 10px; /* Додаємо внутрішній відступ */
+}
+
+.movie-poster {
+    max-width: 100%; /* Щоб постери не виходили за межі блоку */
+}
+
+.movieDetails-container {
+    display: flex;
+    margin-top: 50px;
+    margin-left: 50px;
+}
+
+.movieDetails-poster {
+    flex: 0 0 auto;
+}
+
+.movieDetails-poster-image {
+    width: 400px;
+}
+
+
