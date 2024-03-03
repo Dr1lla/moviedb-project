@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Pagination from './pagination';
 import { getPopularMovies } from './movies';
+import Rating from "./rating";
 import '../css/style.css';
 
 const MovieList = () => {
@@ -35,8 +36,8 @@ const MovieList = () => {
     };
 
     const goToPreviousPage = () => {
-        setCurrentPage((prevPageNum) => { // змінено ім'я параметра з prevPage на prevPageNum
-            const prevPage = prevPageNum - 1; // тепер prevPage є новою змінною
+        setCurrentPage((prevPageNum) => {
+            const prevPage = prevPageNum - 1;
             localStorage.setItem('currentPage', prevPage);
             return prevPage;
         });
@@ -52,6 +53,7 @@ const MovieList = () => {
                             <img src={movie.posterUrl} alt={movie.title} className="movie-poster" />
                             <div>{movie.title}</div>
                         </Link>
+                        <Rating rating={movie.rating} starSize={30} />
                     </li>
                 ))}
             </ul>

@@ -2,10 +2,8 @@
 import axios from 'axios';
 import "../css/style.css";
 
-const apiKey = '1784c92203fc49d4745e3105e1b62993'; // Потрібно замінити YOUR_TMDB_API_KEY на ваш ключ API TMDb
-const page = 1; // Поточна сторінка, можна змінювати динамічно
+const apiKey = '1784c92203fc49d4745e3105e1b62993';
 
-const transformRating = (rating) => rating / 2;
 
 // Функція для отримання списку популярних фільмів
 export const getPopularMovies = async (page = 1, perPage = 20) => {
@@ -15,13 +13,15 @@ export const getPopularMovies = async (page = 1, perPage = 20) => {
             id: movie.id,
             title: movie.title,
             posterUrl: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+            rating: movie.vote_average, // Додайте рейтинг до об'єкта фільму
         }));
-        return { movies, totalPages: response.data.total_pages }; // Додаємо total_pages до виходу функції
+        return { movies, totalPages: response.data.total_pages };
     } catch (error) {
         console.error('Error fetching popular movies:', error);
         return { movies: [], totalPages: 1 };
     }
 };
+
 
 export const getMovieDetails = async (movieId) => {
     try {
@@ -30,5 +30,23 @@ export const getMovieDetails = async (movieId) => {
     } catch (error) {
         console.error('Error fetching movie details:', error);
         return null;
+    }
+};
+
+export const displayMoviesByGenre = async (genre) => {
+    try {
+        // Параметр genre - це жанр, за яким ви хочете отримати фільми
+        // Ось URL для запиту до API The Movie Database (TMDB) за жанром фільмів
+        const apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=${genre}`;
+
+        // Виконуємо запит до API
+        const response = await axios.get(apiUrl);
+
+        // Повертаємо дані про фільми з відповіді API
+        return response.data.results;
+    } catch (error) {
+        // Обробка помилок у разі невдалого запиту
+        console.error('Error fetching movies by genre:', error);
+        return [];
     }
 };

@@ -3,7 +3,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #333;
+    background-color: #2c2929;
     color: #fff;
 }
 
@@ -79,4 +79,55 @@
     margin: 0 10px;
     font-size: 18px;
 }
+.header {
+    position: relative;
+    /* Інші стилі... */
+}
 
+.submenu {
+    position: absolute;
+    top: calc(100% + 10px); /* Змінили зі значення top на calc(100% + 10px) */
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff; /* Змініть на ваш колір фону */
+    border: 1px solid #ccc; /* Змініть на ваш колір обрамлення */
+    padding: 10px;
+    z-index: 1;
+}
+
+.submenu-button {
+    padding: 5px;
+    margin: 5px 0;
+    background-color: #eee; /* Змініть на ваш колір фону кнопок підменю */
+    border: none;
+    cursor: pointer;
+}
+
+.menu-item {
+    position: relative;
+}
+.menu-item {
+    position: relative;
+}
+
+.menu-button-wrapper {
+    cursor: pointer;
+    height: 100%; /* Змінено висоту клікабельності кнопок */
+}
+
+.menu-button {
+    flex: 1; /* Рівномірний розподіл простору між кнопками */
+    height: 100%; /* Розтягнути кнопку на весь висоту "menu-item" */
+    width: auto;
+}
+
+.dark-theme {
+    background-color: #000000;
+    color: #fff;
+}
+
+.movieDetails-p{
+    position: relative;
+    left: 20px;
+}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieDetails } from './movies';
+import Rating from './rating'; // Імпортуємо компоненту рейтингу
 import '../css/style.css';
 
 const MovieDetails = () => {
@@ -34,7 +35,10 @@ const MovieDetails = () => {
                 />
             </div>
             <div className="movieDetails-info"> {/* Додаємо клас для інформації */}
-                <h2 className="movieDetails-title">{movieDetails.title}</h2> {/* Додаємо клас для заголовка */}
+                <h2 className="movieDetails-p">{movieDetails.title}</h2> {/* Додаємо клас для заголовка */}
+                <div className="movieDetails-p"> {/* Додаємо клас для рейтингу */}
+                    <Rating rating={movieDetails.vote_average} /> {/* Додаємо рейтинг */}
+                </div>
                 <p className="movieDetails-p">Country: {movieDetails.production_countries[0]?.name}</p>
                 <p className="movieDetails-p">Release Year: {movieDetails.release_date?.split('-')[0]}</p>
                 <p className="movieDetails-p">Total Votes: {movieDetails.vote_count}</p>

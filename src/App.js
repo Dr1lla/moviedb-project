@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/header';
-import MovieList from './components/moviesList'; // Змінено шлях імпорту
-import { getPopularMovies } from './components/movies'; // Змінено шлях імпорту
+import MovieList from './components/moviesList';
+import { getPopularMovies, displayMoviesByGenre } from './components/movies';
 import MovieDetails from './components/movieDetails';
 
 function App() {
-    const [popularMovies, setPopularMovies] = useState([]);
+    const [movies, setMovies] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchPopularMovies = async () => {
             try {
-                const movies = await getPopularMovies();
-                setPopularMovies(movies);
+                const popularMovies = await getPopularMovies();
+                setMovies(popularMovies);
                 setIsLoading(false);
             } catch (error) {
                 console.error('Error fetching popular movies:', error);
@@ -24,14 +24,19 @@ function App() {
         fetchPopularMovies();
     }, []);
 
-    const handleGoToPage = (pageNumber) => {
-        console.log('Go to page', pageNumber);
+    const handleGenreSelection = async (genre) => {
+        try {
+            const moviesByGenre = await displayMoviesByGenre(genre);
+            setMovies(moviesByGenre);
+        } catch (error) {
+            console.error('Error fetching movies by genre:', error);
+        }
     };
 
     return (
         <Router>
             <div className="App">
-                <Header />
+                <Header onGenreSelect={handleGenreSelection} />
                 <Routes>
                     <Route
                         path="/"
@@ -39,7 +44,7 @@ function App() {
                             isLoading ? (
                                 <div>Loading...</div>
                             ) : (
-                                <MovieList movies={popularMovies} goToPage={handleGoToPage} />
+                                <MovieList movies={movies} />
                             )
                         }
                     />
